@@ -1,5 +1,7 @@
+import { Resolvers } from './types'
+
 // Our resolvers object's keys will correspond to our schema's types and fields.
-export const resolvers = {
+export const resolvers: Resolvers = {
   Query: {
     // returns an array of Tracks that will be used to populate
     // the homepage grid of our web client
