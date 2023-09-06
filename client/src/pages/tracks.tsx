@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "../components";
+import { Layout, QueryResult } from "../components";
 import TrackCard from "../containers/track-card";
 import { gql } from "../__generated__/";
 // ? We run a query within a React component by calling useQuery and passing it our GraphQL query string.
@@ -33,14 +33,14 @@ const TRACKS = gql(`
 */
 const Tracks = () => {
   const { loading, error, data } = useQuery(TRACKS);
-  if (loading) return "Loading...";
-  if (error) return `Error! ${error.message}`;
   console.log(data)
   return <Layout grid>
-    {data?.tracksForHome?.map((track) => (
-      // TODO: Update data for unique values
-      <TrackCard key={track.id} track={track} />
-    ))}
+    <QueryResult data={data} error={error} loading={loading}>
+      {data?.tracksForHome?.map((track) => (
+        // TODO: Update data for unique values
+        <TrackCard key={track.id} track={track} />
+      ))}
+    </QueryResult>
   </Layout>;
 };
 
