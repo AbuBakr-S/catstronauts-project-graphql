@@ -13,10 +13,3 @@ export class TrackAPI extends RESTDataSource {
   
   getAuthor = (authorId: string) => this.get<AuthorModel>(`author/${authorId}`);
 }
-
-// export class SpaceCatsAPI extends RESTDataSource {
-//   constructor() {
-//     super()
-//     this.baseURL = 'https://fake-spacecats-rest-api.cat/';
-//   }
-// }
