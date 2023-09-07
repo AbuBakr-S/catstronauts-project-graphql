@@ -9,7 +9,11 @@ const config: CodegenConfig = {
         // this path is relative to the types.ts
         // as this is the same folder, we have ./context
         // then we tack on DataSourceContext
-        contextType: './context#DataSourceContext'
+        contextType: './context#DataSourceContext',
+        mappers: {
+          Track: "./models#TrackModel",
+          Author: "./models#AuthorModel"
+        },
       },
     },
   },
