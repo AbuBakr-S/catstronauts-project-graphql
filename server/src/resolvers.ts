@@ -11,10 +11,10 @@ export const resolvers: Resolvers = {
     },
     // ? Get a single track by ID for the track page
     track: (_, { id }, { dataSources }) => {
-      return dataSources.trackAPI.getTrack(id)
+      return dataSources.trackAPI.getTrack(id);
     }
   },
-  // ? Another resolver specifically for a track's author
+  // ? Another resolver specifically for a track's author. A RESOLVER CHAIN.
   // The Track key indicates it's for the Track type in our schema
   // Inside that Track key will be another object with an author field, where we'll define our resolver.
   Track: {
@@ -22,7 +22,11 @@ export const resolvers: Resolvers = {
       // getAuthor needs an authorId which we can access from the parent arg returned by tracksForHome
       // tracksForHome returns a list and calls the author resolver once for each track
       // It passes the current track as the value of parent, enabling us to extract the authorId.
-      return dataSources.trackAPI.getAuthor(authorId)
+      return dataSources.trackAPI.getAuthor(authorId);
     },
+    modules: ({ id }, _, { dataSources }) => {
+      // getTrackModules accesses the id from the parent argument, track - getTrack(id)
+      return dataSources.trackAPI.getTrackModules(id);
+    }
   },
 };
