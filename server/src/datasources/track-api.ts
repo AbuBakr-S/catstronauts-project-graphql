@@ -10,6 +10,8 @@ export class TrackAPI extends RESTDataSource {
   // RESOLVERS
   // This method accepts a generic, where we can indicate that it returns an array of TrackModel objects.
   getTracksForHome = () => this.get<TrackModel[]>('tracks');
+
+  getTrack = (trackId: string) => this.get<TrackModel>(`track/${trackId}`);
   
   getAuthor = (authorId: string) => this.get<AuthorModel>(`author/${authorId}`);
 }

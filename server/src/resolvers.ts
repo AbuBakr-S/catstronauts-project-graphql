@@ -9,10 +9,14 @@ export const resolvers: Resolvers = {
     tracksForHome: (_, __, { dataSources }) => {
       return dataSources.trackAPI.getTracksForHome();
     },
-    // ? Another resolver specifically for a track's author
-    // The Track key indicates it's for the Track type in our schema
-    // Inside that Track key will be another object with an author field, where we'll define our resolver.
+    // ? Get a single track by ID for the track page
+    track: (_, { id }, { dataSources }) => {
+      return dataSources.trackAPI.getTrack(id)
+    }
   },
+  // ? Another resolver specifically for a track's author
+  // The Track key indicates it's for the Track type in our schema
+  // Inside that Track key will be another object with an author field, where we'll define our resolver.
   Track: {
     author: ({ authorId }, _, { dataSources }) => {
       // getAuthor needs an authorId which we can access from the parent arg returned by tracksForHome
