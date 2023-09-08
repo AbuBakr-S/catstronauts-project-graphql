@@ -11,7 +11,19 @@ export type TrackModel = {
   thumbnail: string;
   length: number;
   modulesCount: number;
+  description: string;
+  numberOfViews: number;
+  /* 
+    As we won't actually use the array of module ids on each track object,
+    we won't need to define it on our TrackModel.
+  */
 };
+
+export type ModuleModel = {
+  id: string;
+  title: string;
+  length: number;
+}
 
 export type AuthorModel = {
   id: string;
