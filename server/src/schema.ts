@@ -8,6 +8,8 @@ export const typeDefs = gql`
     tracksForHome: [Track!]!
     "Get a specific Track by ID"
     track(id: ID!): Track!
+    "Get a specific Module by ID"
+    module(id: ID!): Module!
   }
 
   "A track is a group of Modules that teaches about a specific topic"
@@ -38,6 +40,10 @@ export const typeDefs = gql`
     title: String!
     "The Module's length in minutes"
     length: Int
+    "The module's text-based description, can be in markdown format. In case of a video, it will be the enriched transcript"
+    content: String!
+    "The URL to each Module's video, for video based modules"
+    videoUrl: String
   }
 
   "Author of a complete Track"

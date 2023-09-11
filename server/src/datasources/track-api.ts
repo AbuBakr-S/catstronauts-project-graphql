@@ -1,5 +1,5 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
-import { TrackModel, AuthorModel } from "../models";
+import { TrackModel, AuthorModel, ModuleModel } from "../models";
 
 // * Set up data source and retrieve data from the REST API.
 
@@ -16,4 +16,6 @@ export class TrackAPI extends RESTDataSource {
   getAuthor = (authorId: string) => this.get<AuthorModel>(`author/${authorId}`);
 
   getTrackModules = (trackId: string) => this.get(`track/${trackId}/modules`);
+
+  getModule = (moduleId: string) => this.get<ModuleModel>(`module/${moduleId}`);
 }

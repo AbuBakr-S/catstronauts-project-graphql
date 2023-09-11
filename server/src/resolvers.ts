@@ -12,6 +12,10 @@ export const resolvers: Resolvers = {
     // ? Get a single track by ID for the track page
     track: (_, { id }, { dataSources }) => {
       return dataSources.trackAPI.getTrack(id);
+    },
+    // ? Get a single module by ID for the module detail page
+    module: (_, { id }, { dataSources }) => {
+      return dataSources.trackAPI.getModule(id);
     }
   },
   // ? Another resolver specifically for a track's author. A RESOLVER CHAIN.
