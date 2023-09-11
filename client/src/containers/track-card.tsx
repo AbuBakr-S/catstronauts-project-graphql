@@ -5,6 +5,25 @@ import { humanReadableTimeFromSeconds } from "../utils/helpers";
 // ? The Track type for our track component prop
 import type { Track } from '../__generated__/graphql'
 import { Link } from "react-router-dom"
+import { useMutation } from "@apollo/client";
+import { gql } from "../__generated__";
+
+/**
+* Mutation to increment a track's number of views
+*/
+const INCREMENT_TRACK_VIEWS = gql(`
+  mutation IncrementTrackViews($incrementTrackViewsId: ID!) {
+    incrementTrackViews(id: $incrementTrackViewsId) {
+      code
+      success
+      message
+      track {
+        id
+        numberOfViews
+      }
+    }
+  }
+`);
 
 /**
  * Track Card component renders basic info in a card format
@@ -13,8 +32,19 @@ import { Link } from "react-router-dom"
 const TrackCard: React.FC<{ track: Track }> = ({ track }) => {
   const { title, thumbnail, author, length, modulesCount, id } = track;
 
+  // ? Calling useMutation doesn't actually execute the mutation automatically!
+  // We will use the destructured mutate function
+  const [incrementTrackViews] = useMutation(INCREMENT_TRACK_VIEWS, {
+    variables: { incrementTrackViewsId: id },
+    // to observe what the mutation response returns
+    onCompleted: (data) => console.log(data)
+  });
+
   return (
-    <CardContainer to={`/track/${id}`}>
+    <CardContainer
+      to={`/track/${id}`}
+      onClick={() => incrementTrackViews()}
+    >
       <CardContent>
         <CardImageContainer>
           <CardImage src={thumbnail || ""} alt={title} />
