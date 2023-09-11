@@ -39,7 +39,6 @@ export const Module = () => {
       <QueryResult data={data} error={error} loading={loading}>
         <ModuleDetail track={data?.track} module={data?.module} />
       </QueryResult>
-      <h1>Module</h1>
     </Layout>
   )
 }
