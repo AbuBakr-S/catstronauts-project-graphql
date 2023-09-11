@@ -12,6 +12,24 @@ export const typeDefs = gql`
     module(id: ID!): Module!
   }
 
+  # We could return a single Track because that's what this mutation updates
+  # Returning a new object with additional fields is a better approach
+  type Mutation {
+    incrementTrackViews(id: ID!): IncrementTrackViewsResponse!
+  }
+
+  # Track can be null here as the Mutation may fail
+  type IncrementTrackViewsResponse {
+    "Similar to HTTP status code, represents the status of the mutation"
+    code: Int!
+    "Indicates whether the mutation was successful"
+    success: Boolean!
+    "Human-readable message for the UI"
+    message: String!
+    "Newly updated track after a successful mutation"
+    track: Track
+  }
+
   "A track is a group of Modules that teaches about a specific topic"
   type Track {
     id: ID!
