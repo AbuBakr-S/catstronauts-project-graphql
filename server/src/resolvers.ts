@@ -18,6 +18,17 @@ export const resolvers: Resolvers = {
       return dataSources.trackAPI.getModule(id);
     }
   },
+  Mutation: {
+    incrementTrackViews: async (_, { id }, { dataSources }) => {
+      const track = await dataSources.trackAPI.incrementTrackViews(id);
+      return {
+        code: 200,
+        success: true,
+        message: `Successfully incremented number of views for track ${id}`,
+        track
+      }
+    }
+  },
   // ? Another resolver specifically for a track's author. A RESOLVER CHAIN.
   // The Track key indicates it's for the Track type in our schema
   // Inside that Track key will be another object with an author field, where we'll define our resolver.
